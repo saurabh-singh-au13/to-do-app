@@ -3,9 +3,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "./NavBar.css";
 
 const NavBar = () => {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
-console.log(isAuthenticated)
-console.log(loginWithRedirect)
+  const { user, loginWithRedirect, logout, isLoading, isAuthenticated } =
+    useAuth0();
+
+  console.log(isAuthenticated);
+  console.log(loginWithRedirect);
+
+  if (isLoading) {
+    return <img style={{ width:"30%", height:"30%"}} src="loading.gif" />
+  }
+
   return (
     <>
       <nav className="navbar bg-dark">
@@ -14,6 +21,9 @@ console.log(loginWithRedirect)
         </div>
         {isAuthenticated ? (
           <>
+            <img src={user.picture} alt={user.name} />
+            <span>{user.name} </span>
+
             <button
               onClick={() =>
                 logout({ logoutParams: { returnTo: window.location.origin } })
@@ -21,13 +31,14 @@ console.log(loginWithRedirect)
             >
               Log Out
             </button>
+            
           </>
         ) : (
           <>
             <div className="container-2">
-              <span onClick={() => loginWithRedirect()} className="login">
+              <button onClick={() => loginWithRedirect()} className="login">
                 Login
-              </span>
+              </button>
             </div>
           </>
         )}

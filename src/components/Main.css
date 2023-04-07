@@ -1,0 +1,17 @@
+.con{
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+.todofield{
+    width: 80%;
+    height: 50rem;
+    background-color: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
